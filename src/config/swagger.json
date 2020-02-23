@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": ["http"],
+  "produces": ["application/json"],
+  "paths": {
+    "/news": {
+      "get": {
+        "tags": ["get yearly news!"],
+        "summary": "This method provides the news of a specified year",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        },
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Specifies the query string",
+            "required": true,
+            "type": "number"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "add a cool article!"
+        ],
+        "summary": "Add a new article to the database",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "News",
+            "description": "Article Object to add",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userName"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "authors": {
+                  "type": "list"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/news/{id}": {
+        "put": {
+          "tags": [
+            "edit an article."
+          ],
+          "summary": "Change an existing article",
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id"
+            },
+            {
+              "in": "body",
+              "name": "News",
+              "description": "Article Object replacer",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "authors": {
+                    "type": "list"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      }
+  }
+}
+
