@@ -10,7 +10,7 @@
   "paths": {
     "/news": {
       "get": {
-        "tags": ["get yearly news!"],
+        "tags": ["Manage Articles!"],
         "summary": "This method provides the news of a specified year",
         "responses": {
           "200": {
@@ -34,9 +34,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "add a cool article!"
-        ],
+        "tags": ["Manage Articles!"],
         "summary": "Add a new article to the database",
         "description": "",
         "consumes": [
@@ -82,9 +80,7 @@
     },
     "/news/{id}": {
         "put": {
-          "tags": [
-            "edit an article."
-          ],
+          "tags": ["Manage Articles!"],
           "summary": "Change an existing article",
           "description": "",
           "consumes": [
@@ -120,6 +116,28 @@
                   }
                 }
               }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Manage Articles!"],
+          "summary": "Delete an article!",
+          "description": "Delete x article from the database",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id"
             }
           ],
           "responses": {

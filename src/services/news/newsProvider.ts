@@ -48,11 +48,11 @@ class api implements BasicApi<News> {
         // esto seguramente mucho mas simple en un orm
         const indexArticulo = this.data.findIndex((article: News) => article.id == id);
 
-        const articulo =this.data[indexArticulo];
+        const articulo =JSON.parse(JSON.stringify(this.data[indexArticulo]));
 
         this.data.splice(indexArticulo,1);
-        return "";
-
+        
+        return articulo;
       };
 }
 
