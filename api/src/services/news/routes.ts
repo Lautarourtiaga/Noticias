@@ -50,7 +50,7 @@ export default [
 
       const result = await newsProvider.list(+query.year);
       
-      res.status(200).send(result);
+      res.status(200).send(responseWrapper(result));
       }
     ]
   },
@@ -71,7 +71,7 @@ export default [
 
       const result = await newsProvider.add(NewArticle);
       
-      res.status(200).send(result);
+      res.status(200).send(responseWrapper(result));
       }
     ]
   },
@@ -83,7 +83,7 @@ export default [
 
       const result = await newsProvider.put(+req.params.id,req.body);
       
-      res.status(200).send(result);
+      res.status(200).send(responseWrapper(result));
       }
     ]
   },
@@ -95,8 +95,16 @@ export default [
 
       const result = await newsProvider.delete(+req.params.id);
       
-      res.status(200).send(result);
+      res.status(200).send(responseWrapper(result));
       }
     ]
   }
 ];
+
+
+function responseWrapper(result: any){
+  return {
+    json: result,
+    version: "v1"
+  }
+}

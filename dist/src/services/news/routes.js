@@ -57,7 +57,7 @@ exports.default = [
         handler: [
             ({ query }, res) => __awaiter(this, void 0, void 0, function* () {
                 const result = yield newsProvider.list(+query.year);
-                res.status(200).send(responseWrapper(result));
+                res.status(200).send(result);
             })
         ]
     },
@@ -74,7 +74,7 @@ exports.default = [
                     authors: json.authors
                 };
                 const result = yield newsProvider.add(NewArticle);
-                res.status(200).send(responseWrapper(result));
+                res.status(200).send(result);
             })
         ]
     },
@@ -84,7 +84,7 @@ exports.default = [
         handler: [
             (req, res) => __awaiter(this, void 0, void 0, function* () {
                 const result = yield newsProvider.put(+req.params.id, req.body);
-                res.status(200).send(responseWrapper(result));
+                res.status(200).send(result);
             })
         ]
     },
@@ -94,15 +94,9 @@ exports.default = [
         handler: [
             (req, res) => __awaiter(this, void 0, void 0, function* () {
                 const result = yield newsProvider.delete(+req.params.id);
-                res.status(200).send(responseWrapper(result));
+                res.status(200).send(result);
             })
         ]
     }
 ];
-function responseWrapper(result) {
-    return {
-        json: result,
-        version: "v1"
-    };
-}
 //# sourceMappingURL=routes.js.map

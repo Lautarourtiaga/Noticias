@@ -11,9 +11,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const newsProvider_1 = __importDefault(require("./newsProvider"));
-//En principio se instancia sin ningun servicio, despues va a ser un servicio que llame a la base de datos
-const newsProvider = new newsProvider_1.default([
+const newsProvider_1 = __importDefault(require("../../src/services/news/newsProvider"));
+const hardcodedNewsProvider = new newsProvider_1.default([
     {
         id: 1,
         title: "Coronavirus se esparce por el mundo!",
@@ -50,59 +49,32 @@ const newsProvider = new newsProvider_1.default([
         date: new Date("1/1/2020")
     },
 ]);
-exports.default = [
-    {
-        path: "/api/v1/news",
-        method: "get",
-        handler: [
-            ({ query }, res) => __awaiter(this, void 0, void 0, function* () {
-                const result = yield newsProvider.list(+query.year);
-                res.status(200).send(responseWrapper(result));
-            })
-        ]
-    },
-    {
-        path: "/api/v1/news",
-        method: "post",
-        handler: [
-            (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const json = req.body;
-                const NewArticle = {
-                    title: json.title,
-                    body: json.body,
-                    date: new Date(json.date),
-                    authors: json.authors
-                };
-                const result = yield newsProvider.add(NewArticle);
-                res.status(200).send(responseWrapper(result));
-            })
-        ]
-    },
-    {
-        path: "/api/v1/news/:id",
-        method: "put",
-        handler: [
-            (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const result = yield newsProvider.put(+req.params.id, req.body);
-                res.status(200).send(responseWrapper(result));
-            })
-        ]
-    },
-    {
-        path: "/api/v1/news/:id",
-        method: "delete",
-        handler: [
-            (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const result = yield newsProvider.delete(+req.params.id);
-                res.status(200).send(responseWrapper(result));
-            })
-        ]
-    }
-];
-function responseWrapper(result) {
-    return {
-        json: result,
-        version: "v1"
-    };
-}
-//# sourceMappingURL=routes.js.map
+describe("newsProvider", () => {
+    test("Si se filtra por 2019, entonces unicamente aparecen registros de 2019", () => __awaiter(this, void 0, void 0, function* () {
+        expect(hardcodedNewsProvider.list(2019).every((singleNews) => singleNews.date.getFullYear() === 2019)).toBe(true);
+    }));
+    test("Si se añade una noticia a la lista fetcheada de noticias, entonces la cantidad de noticias es 6", () => __awaiter(this, void 0, void 0, function* () {
+        const newArticle = {
+            title: "Nuevo Dogo",
+            body: "nuevo cuerpo",
+            date: "1/1/2020",
+            authors: ["dodoo"]
+        };
+        hardcodedNewsProvider.add(newArticle);
+        expect(hardcodedNewsProvider.list().length).toBe(6);
+    }));
+    test("Si se updatea un articulo con un nuevo titulo, body y autores. Entonces estos se guardan ", () => __awaiter(this, void 0, void 0, function* () {
+        const newProperties = {
+            title: "UltraMan muere",
+            body: "No man, ultra man murió, que sad lpm",
+            date: "1/1/2020",
+            authors: ["ultramanFan"]
+        };
+        hardcodedNewsProvider.put(2, newProperties);
+        const changedArticle = hardcodedNewsProvider.list().find((art) => art.id == 2);
+        expect(changedArticle.title).toMatch(/UltraMan muere/);
+        expect(changedArticle.body).toMatch(/No man, ultra man murió, que sad lpm/);
+        expect(changedArticle.authors).toContain("ultramanFan");
+    }));
+});
+//# sourceMappingURL=newsProvider.test.js.map
