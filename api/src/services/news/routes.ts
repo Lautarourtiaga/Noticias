@@ -55,6 +55,18 @@ export default [
     ]
   },
   {
+    path: "/api/v1/news/:id",
+    method: "get",
+    handler: [
+      async (req: Request, res: Response) => {
+
+      const result = await newsProvider.find(+req.params.id);
+      
+      res.status(200).send(responseWrapper(result));
+      }
+    ]
+  },
+  {
     path: "/api/v1/news",
     method: "post",
     handler: [

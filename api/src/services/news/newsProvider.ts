@@ -14,6 +14,10 @@ class api implements BasicApi<News> {
         return (year)?this.data.filter((singleNews: News) => singleNews.date.getFullYear() === year):this.data;
       };
 
+      find(id: number) {
+        return this.data.find((singleNews: News) => singleNews.id == id);
+      };
+
       add(singleNews: any) {
         
         //simulo que le pongo el ultimoid

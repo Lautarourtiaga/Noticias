@@ -9,6 +9,10 @@ class api {
         return (year) ? this.data.filter((singleNews) => singleNews.date.getFullYear() === year) : this.data;
     }
     ;
+    find(id) {
+        return this.data.find((singleNews) => singleNews.id == id);
+    }
+    ;
     add(singleNews) {
         //simulo que le pongo el ultimoid
         const highestIdplus = this.data.reduce((max, article) => max.id > article.id ? max : article).id + 1;

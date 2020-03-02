@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import IconButton from '@material-ui/core/IconButton';
+import Link from 'next/link';
 
 export default function AlbumDetail(props) {
     
@@ -47,12 +48,17 @@ export default function AlbumDetail(props) {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <IconButton aria-label="view" color="primary">
-                                <VisibilityIcon />
-                            </IconButton>
-                            <IconButton aria-label="edit" color="secondary">
-                                <EditIcon />
-                            </IconButton>
+                            <Link href="/news/[id]" as={`/news/${card.id}`}>
+                                <IconButton aria-label="view" color="primary">
+                                    <VisibilityIcon />
+                                </IconButton>
+                            </Link>
+                            <Link href="/news/[id]/edit" as={`/news/${card.id}/edit`}>
+                                <IconButton aria-label="edit" color="secondary">
+                                    <EditIcon />
+                                </IconButton>
+                            </Link>
+
                         </CardActions>
                         </Card>
                     </Grid>

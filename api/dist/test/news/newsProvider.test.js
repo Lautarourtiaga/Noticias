@@ -89,5 +89,9 @@ describe("newsProvider", () => {
         const news = hardcodedNewsProvider.list(2019);
         expect(news.some((a) => a.id === 3)).toBe(false);
     }));
+    test("Si se hace get de un articulo, entonces ese articulo viene correctamente", () => __awaiter(this, void 0, void 0, function* () {
+        const article = hardcodedNewsProvider.find(1);
+        expect(article.title).toMatch(/Coronavirus se esparce por el mundo!/);
+    }));
 });
 //# sourceMappingURL=newsProvider.test.js.map

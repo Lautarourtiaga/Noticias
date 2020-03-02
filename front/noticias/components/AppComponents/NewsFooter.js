@@ -18,10 +18,10 @@ export default function AppFooter(props) {
     return (
     <footer className="makeStyles-footer-8">
         <Typography variant="h6" align="center" gutterBottom>
-        Footer
+        Contacto
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-        Something here to give the footer a purpose!
+        Tel: 011-1231-1231. Email: lautarourtiaga99@gmail.com
         </Typography>
         <Copyright />
     </footer>

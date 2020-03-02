@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -30,10 +31,13 @@ export default function NewsBar(props){
 
     <AppBar position="relative">
         <Toolbar>
-        <CameraIcon className="MuiSvgIcon-root makeStyles-icon-9"/>
+        <Button style={{color: "white", marginRight: "15px"}}>
+          <MenuIcon fontSize="large"/>
+        </Button>
+        
         
         <Typography variant="h6" color="inherit" noWrap>
-            Articulos
+            Cambiar a drawer
         </Typography>
         </Toolbar>
     </AppBar>

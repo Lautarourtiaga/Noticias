@@ -62,6 +62,16 @@ exports.default = [
         ]
     },
     {
+        path: "/api/v1/news/:id",
+        method: "get",
+        handler: [
+            (req, res) => __awaiter(this, void 0, void 0, function* () {
+                const result = yield newsProvider.find(+req.params.id);
+                res.status(200).send(responseWrapper(result));
+            })
+        ]
+    },
+    {
         path: "/api/v1/news",
         method: "post",
         handler: [

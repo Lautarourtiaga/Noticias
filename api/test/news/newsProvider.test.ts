@@ -104,4 +104,12 @@ describe("newsProvider", () => {
     
   });
 
+  test("Si se hace get de un articulo, entonces ese articulo viene correctamente", async () => {
+    
+    const article:any = hardcodedNewsProvider.find(1);
+    
+    expect(article.title).toMatch(/Coronavirus se esparce por el mundo!/);
+    
+  });
+
 });
